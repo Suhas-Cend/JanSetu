@@ -100,7 +100,7 @@ const INITIAL_ISSUES = [
     isTracked: true,
     status: "Pending",
     claimedBy: null,
-    image: "[https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=800&q=80](https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=800&q=80)",
+    image: "https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=800&q=80",
     date: "23 Sep 2026"
   }
 ];
@@ -265,7 +265,7 @@ export default function App() {
 
   useEffect(() => {
     const link = document.createElement('link');
-    link.href = '[https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400..700;1,400..700&display=swap](https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400..700;1,400..700&display=swap)';
+    link.href = 'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400..700;1,400..700&display=swap';
     link.rel = 'stylesheet';
     document.head.appendChild(link);
     return () => {
@@ -324,10 +324,13 @@ export default function App() {
       `}</style>
 
       {currentScreen === 'auth' || !user ? (
-        <ScreenAuth/>
+        <ScreenAuth />
       ) : (
         <div className="flex w-full min-h-screen">
-          <Sidebar currentScreen="{currentScreen}" onNavigate="{(screen)" user="{user}"> setCurrentScreen(screen)}
+          <Sidebar
+            user={user}
+            currentScreen={currentScreen}
+            onNavigate={(screen) => setCurrentScreen(screen)}
             onLogout={handleLogout}
             onSelectPramaanDefault={() => handleOpenPramaan(issues[0])}
           />
@@ -351,21 +354,33 @@ export default function App() {
 
             <main className="flex-1 p-8 max-w-[1440px] w-full mx-auto">
               {currentScreen === 'feed' && (
-                <ScreenAwaazFeed issues="{issues}" onAnumodan="{handleAnumodanVote}"/>
+                <ScreenAwaazFeed
+                  issues={issues}
+                  onAnumodan={handleAnumodanVote}
+                />
               )}
 
               {currentScreen === 'post' && (
-                <ScreenPostAwaaz onCancel="{()" user="{user}"> setCurrentScreen(user.role === 'citizen' ? 'feed' : 'taskboard')}
+                <ScreenPostAwaaz
+                  user={user}
+                  onCancel={() => setCurrentScreen(user.role === 'citizen' ? 'feed' : 'taskboard')}
                   onSubmit={handlePostSubmit}
                 />
               )}
 
               {currentScreen === 'taskboard' && (
-                <ScreenOfficerTaskBoard issues="{issues}" onClaim="{handleClaimIssue}" onOpenSaboot="{handleOpenSaboot}" user="{user}"/>
+                <ScreenOfficerTaskBoard
+                  issues={issues}
+                  user={user}
+                  onClaim={handleClaimIssue}
+                  onOpenSaboot={handleOpenSaboot}
+                />
               )}
 
               {currentScreen === 'saboot' && activeSabootIssue && (
-                <ScreenSabootSubmission issue="{activeSabootIssue}" onBack="{()"> setCurrentScreen('taskboard')}
+                <ScreenSabootSubmission
+                  issue={activeSabootIssue}
+                  onBack={() => setCurrentScreen('taskboard')}
                   onSubmitSuccess={(completedIssue) => {
                     setIssues(prev => prev.map(i => i.id === completedIssue.id ? completedIssue : i));
                     handleOpenPramaan(completedIssue);
@@ -374,7 +389,10 @@ export default function App() {
               )}
 
               {currentScreen === 'pramaan' && (
-                <ScreenAIVerification issue="{activePramaanIssue" issues[0]} onBack="{()" userRole="{user.role}" ||> {
+                <ScreenAIVerification
+                  issue={activePramaanIssue || issues[0]}
+                  userRole={user.role}
+                  onBack={() => {
                     if (user.role === 'officer') {
                       setCurrentScreen('taskboard');
                     } else {
@@ -385,11 +403,15 @@ export default function App() {
               )}
 
               {currentScreen === 'ledger' && (
-                <ScreenPublicLedger officers="{LEADERBOARD_OFFICERS}"/>
+                <ScreenPublicLedger officers={LEADERBOARD_OFFICERS} />
               )}
 
               {currentScreen === 'profile' && (
-                <ScreenProfile issues="{issues}" onViewPramaan="{handleOpenPramaan}" user="{user}"/>
+                <ScreenProfile
+                  user={user}
+                  issues={issues}
+                  onViewPramaan={handleOpenPramaan}
+                />
               )}
             </main>
           </div>
@@ -424,7 +446,7 @@ function Sidebar({ user, currentScreen, onNavigate, onLogout, onSelectPramaanDef
       <div>
         <div className="flex items-center gap-3 px-2 py-4 mb-5 border-b border-[#9BA8AB]/20">
           <div className="w-10 h-10 rounded-lg bg-[#11212D] flex items-center justify-center border border-[#9BA8AB]/30 text-[#6BBF4A]">
-            <Icon name="Layers" size="{22}"/>
+            <Icon name="Layers" size={22} />
           </div>
           <div>
             <h1 className="font-bebas text-[28px] tracking-wider text-[#CCD0CF] leading-none m-0">
@@ -458,7 +480,11 @@ function Sidebar({ user, currentScreen, onNavigate, onLogout, onSelectPramaanDef
                     : 'text-[#CCD0CF]/85 hover:bg-[#253745] hover:text-[#CCD0CF]'
                 }`}
               >
-                <Icon "text-[#6BBF4A]" "text-[#9BA8AB]"} "text-[#FF9800]") (isCitizen : ? className="{isActive" name="{item.icon}" size="{20}"/>
+                <Icon
+                  name={item.icon}
+                  size={20}
+                  className={isActive ? (isCitizen ? "text-[#6BBF4A]" : "text-[#FF9800]") : "text-[#9BA8AB]"}
+                />
                 <span className="uppercase text-[13px]">{item.label}</span>
               </button>
             );
@@ -485,7 +511,7 @@ function Sidebar({ user, currentScreen, onNavigate, onLogout, onSelectPramaanDef
           onClick={onLogout}
           className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#253745] hover:bg-[#F44336]/20 text-[#CCD0CF] hover:text-[#F44336] text-[13px] font-bold uppercase tracking-wider btn-interact border border-[#9BA8AB]/20"
         >
-          <Icon name="LogOut" size="{16}"/>
+          <Icon name="LogOut" size={16} />
           Sign Out
         </button>
       </div>
@@ -539,7 +565,7 @@ function ScreenAuth() {
       <div className="w-full max-w-[480px] bg-[#11212D] border border-[#9BA8AB]/20 rounded-xl p-8 card-shadow">
         <div className="text-center mb-6">
           <div className="w-14 h-14 mx-auto rounded-xl bg-[#253745] flex items-center justify-center border border-[#9BA8AB]/30 text-[#6BBF4A] mb-3">
-            <Icon name="Layers" size="{32}"/>
+            <Icon name="Layers" size={32} />
           </div>
           <h1 className="font-bebas text-[32px] text-[#CCD0CF] leading-tight tracking-wider">
             JANSETU CIVIC PORTAL
@@ -714,7 +740,7 @@ function ScreenAwaazFeed({ issues, onAnumodan }) {
       {displayedIssues.length === 0 ? (
         <div className="bg-[#11212D] rounded-xl border border-[#9BA8AB]/15 p-12 text-center my-6">
           <div className="w-12 h-12 mx-auto rounded-full bg-[#253745] flex items-center justify-center text-[#9BA8AB] mb-3">
-            <Icon name="Flame" size="{24}"/>
+            <Icon name="Flame" size={24} />
           </div>
           <h3 className="font-bebas text-[20px] text-[#CCD0CF]">
             {tab === 'tracked' ? "You haven't tracked any issues yet." : "No trending issues recorded."}
@@ -764,7 +790,7 @@ function ScreenAwaazFeed({ issues, onAnumodan }) {
                       {issue.title}
                     </h3>
                     <div className="flex items-center gap-1.5 text-[12px] text-[#9BA8AB] mb-3">
-                      <Icon className="text-[#FF9800]" name="MapPin" size="{14}"/>
+                      <Icon name="MapPin" size={14} className="text-[#FF9800]" />
                       <span>{issue.location}</span>
                       <span className="mx-1">•</span>
                       <span>{issue.date}</span>
@@ -783,7 +809,7 @@ function ScreenAwaazFeed({ issues, onAnumodan }) {
                           : 'bg-[#253745] hover:bg-[#4A5C6A] text-[#CCD0CF] border-[#9BA8AB]/20'
                       }`}
                     >
-                      <Icon "text-[#FF9800]"} "text-black : ? className="{issue.hasVoted" fill-black" name="Flame" size="{18}"/>
+                      <Icon name="Flame" size={18} className={issue.hasVoted ? "text-black fill-black" : "text-[#FF9800]"} />
                       <span>{issue.hasVoted ? 'Anumodit' : '🔥 Anumodan'}</span>
                     </button>
 
@@ -935,7 +961,7 @@ function ScreenPostAwaaz({ user, onCancel, onSubmit }) {
               className="w-full bg-[#06141B] border border-[#9BA8AB]/30 rounded-lg px-4 py-3 pl-10 text-[#CCD0CF] text-[15px] focus:outline-none focus:border-[#6BBF4A]"
             />
             <div className="absolute left-3.5 top-3.5 text-[#9BA8AB]">
-              <Icon name="MapPin" size="{18}"/>
+              <Icon name="MapPin" size={18} />
             </div>
           </div>
 
@@ -947,7 +973,7 @@ function ScreenPostAwaaz({ user, onCancel, onSubmit }) {
                   onClick={() => handleSelectSuggestion(item)}
                   className="px-4 py-2.5 text-[14px] text-[#CCD0CF] hover:bg-[#253745] cursor-pointer flex items-center gap-2 border-b border-[#253745] last:border-none"
                 >
-                  <Icon className="text-[#FF9800]" name="MapPin" size="{14}"/>
+                  <Icon name="MapPin" size={14} className="text-[#FF9800]" />
                   <span>{item}</span>
                 </div>
               ))}
@@ -975,7 +1001,7 @@ function ScreenPostAwaaz({ user, onCancel, onSubmit }) {
                 onClick={() => { setPreviewImage(null); setRawFile(null); }}
                 className="absolute top-3 right-3 bg-[#06141B]/80 text-[#CCD0CF] hover:text-[#F44336] p-1.5 rounded-md btn-interact"
               >
-                <Icon name="XCircle" size="{20}"/>
+                <Icon name="XCircle" size={20} />
               </button>
             </div>
           ) : (
@@ -984,7 +1010,7 @@ function ScreenPostAwaaz({ user, onCancel, onSubmit }) {
               onClick={() => fileInputRef.current?.click()}
               className="w-full py-8 border-2 border-dashed border-[#253745] hover:border-[#4A5C6A] rounded-lg bg-[#06141B]/60 flex flex-col items-center justify-center text-[#9BA8AB] hover:text-[#CCD0CF] btn-interact"
             >
-              <Icon className="text-[#4A5C6A] mb-2" name="UploadCloud" size="{36}"/>
+              <Icon name="UploadCloud" size={36} className="text-[#4A5C6A] mb-2" />
               <span className="text-[14px] font-semibold uppercase">Click to Select Issue Photo</span>
               <span className="text-[12px] text-[#9BA8AB] mt-1">Supports JPG, PNG with camera Exif metadata</span>
             </button>
@@ -1107,7 +1133,7 @@ function ScreenOfficerTaskBoard({ issues, user, onClaim, onOpenSaboot }) {
         <div className="grid grid-cols-2 gap-6">
           {unclaimedIssues.length === 0 ? (
             <div className="col-span-2 bg-[#11212D] rounded-xl border border-[#9BA8AB]/15 p-12 text-center">
-              <Icon className="mx-auto text-[#6BBF4A] mb-3" name="CheckCircle2" size="{32}"/>
+              <Icon name="CheckCircle2" size={32} className="mx-auto text-[#6BBF4A] mb-3" />
               <h3 className="font-bebas text-[20px] text-[#CCD0CF]">All Issues Claimed</h3>
               <p className="text-[14px] text-[#9BA8AB]">No pending unassigned civic defects in your jurisdiction.</p>
             </div>
@@ -1132,7 +1158,7 @@ function ScreenOfficerTaskBoard({ issues, user, onClaim, onOpenSaboot }) {
                       {issue.title}
                     </h3>
                     <div className="flex items-center gap-1.5 text-[12px] text-[#9BA8AB] mb-2">
-                      <Icon className="text-[#FF9800]" name="MapPin" size="{14}"/>
+                      <Icon name="MapPin" size={14} className="text-[#FF9800]" />
                       <span className="truncate">{issue.location}</span>
                     </div>
                     <p className="text-[14px] text-[#CCD0CF]/80 line-clamp-2 mb-3">
@@ -1143,7 +1169,7 @@ function ScreenOfficerTaskBoard({ issues, user, onClaim, onOpenSaboot }) {
 
                 <div className="p-5 pt-0 flex items-center justify-between border-t border-[#253745] mt-2 pt-4">
                   <div className="flex items-center gap-1.5 text-[#FF9800]">
-                    <Icon name="Flame" size="{16}"/>
+                    <Icon name="Flame" size={16} />
                     <span className="font-bebas text-[18px]">{issue.anumodanCount}</span>
                     <span className="text-[11px] text-[#9BA8AB] uppercase">Votes</span>
                   </div>
@@ -1189,7 +1215,7 @@ function ScreenOfficerTaskBoard({ issues, user, onClaim, onOpenSaboot }) {
                   {issue.title}
                 </h3>
                 <p className="text-[12px] text-[#9BA8AB] mb-4 flex items-center gap-1">
-                  <Icon className="text-[#FF9800]" name="MapPin" size="{14}"/>
+                  <Icon name="MapPin" size={14} className="text-[#FF9800]" />
                   {issue.location}
                 </p>
 
@@ -1257,7 +1283,7 @@ function ScreenSabootSubmission({ issue, onBack, onSubmitSuccess }) {
         beforeImg: beforeImage,
         afterImg: afterImage
       }
-    }
+    };
     onSubmitSuccess(completedIssue);
   };
 
@@ -1269,7 +1295,7 @@ function ScreenSabootSubmission({ issue, onBack, onSubmitSuccess }) {
             onClick={onBack}
             className="p-2 rounded-lg bg-[#253745] hover:bg-[#4A5C6A] text-[#CCD0CF] btn-interact"
           >
-            <Icon name="ArrowLeft" size="{20}"/>
+            <Icon name="ArrowLeft" size={20} />
           </button>
           <div>
             <h1 className="font-bebas text-[32px] text-[#CCD0CF] leading-tight">
@@ -1312,7 +1338,7 @@ function ScreenSabootSubmission({ issue, onBack, onSubmitSuccess }) {
                 onClick={() => beforeInputRef.current?.click()}
                 className="w-full h-48 border-2 border-dashed border-[#253745] rounded-lg bg-[#06141B] flex flex-col items-center justify-center text-[#9BA8AB] btn-interact"
               >
-                <Icon className="mb-2 text-[#4A5C6A]" name="UploadCloud" size="{28}"/>
+                <Icon name="UploadCloud" size={28} className="mb-2 text-[#4A5C6A]" />
                 <span className="text-[13px] uppercase font-semibold">Upload Before Photo</span>
               </button>
             )}
@@ -1349,7 +1375,7 @@ function ScreenSabootSubmission({ issue, onBack, onSubmitSuccess }) {
                 onClick={() => afterInputRef.current?.click()}
                 className="w-full h-48 border-2 border-dashed border-[#6BBF4A]/40 rounded-lg bg-[#06141B] flex flex-col items-center justify-center text-[#9BA8AB] hover:text-[#CCD0CF] btn-interact"
               >
-                <Icon className="mb-2 text-[#6BBF4A]" name="UploadCloud" size="{28}"/>
+                <Icon name="UploadCloud" size={28} className="mb-2 text-[#6BBF4A]" />
                 <span className="text-[13px] uppercase font-semibold text-[#6BBF4A]">Upload After Photo</span>
                 <span className="text-[11px] text-[#9BA8AB] mt-1">Must be captured at exact defect site</span>
               </button>
@@ -1418,7 +1444,7 @@ function ScreenSabootSubmission({ issue, onBack, onSubmitSuccess }) {
               🔒 Auto-Captured Geo Tag (Tamper-Resistant)
             </span>
             <div className="flex items-center gap-2 text-[13px] text-[#CCD0CF] font-mono">
-              <Icon className="text-[#FF9800]" name="MapPin" size="{16}"/>
+              <Icon name="MapPin" size={16} className="text-[#FF9800]" />
               <span>{autoGeo}</span>
             </div>
           </div>
@@ -1427,7 +1453,7 @@ function ScreenSabootSubmission({ issue, onBack, onSubmitSuccess }) {
               ⏰ Hardware System NTP Timestamp
             </span>
             <div className="flex items-center gap-2 text-[13px] text-[#CCD0CF] font-mono">
-              <Icon className="text-[#6BBF4A]" name="Clock" size="{16}"/>
+              <Icon name="Clock" size={16} className="text-[#6BBF4A]" />
               <span>{autoTimestamp}</span>
             </div>
           </div>
@@ -1464,7 +1490,7 @@ function ScreenAIVerification({ issue, userRole, onBack }) {
     approved: false,
     coins: 450,
     beforeImg: issue.verificationData?.beforeImg || issue.image,
-    afterImg: issue.verificationData?.afterImg || "[https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80](https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80)"
+    afterImg: issue.verificationData?.afterImg || "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80"
   });
 
   const fetchImageAsBase64 = async (url) => {
@@ -1515,7 +1541,7 @@ function ScreenAIVerification({ issue, userRole, onBack }) {
           }
         `;
 
-        const response = await fetch(`[https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$](https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$){apiKey}`, {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
