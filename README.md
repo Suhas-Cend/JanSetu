@@ -1,7 +1,4 @@
 
-[JanSetu - A Bridge](https://files.catbox.moe/nywbgq.png)
-
-
 <div align="center">
 
 <br/>
