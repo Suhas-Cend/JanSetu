@@ -36,7 +36,7 @@ You just open it and share your problem using a text, a voice note, or a picture
 
 ---
 
-## 🦄 What Makes JanSetu Unique?
+##  What Makes JanSetu Unique?
 
 There are other apps out there, but they usually make *you* do the hard work. They ask you to pick from long drop-down menus or know the official names of government departments. 
 
@@ -47,7 +47,7 @@ Here is why JanSetu is a completely different kind of bridge:
 
 ---
 
-## 🧠 The "Smart Helper" Inside (AI Integrations & Agentic Use)
+##  The "Smart Helper" Inside (AI Integrations & Agentic Use)
 
 JanSetu works so well because it has a team of invisible, super-fast "helpers" (Artificial Intelligence) working together like a relay race. We call this an **Agentic Workflow**—meaning the system is smart enough to take charge and do the tasks for you from start to finish.
 
