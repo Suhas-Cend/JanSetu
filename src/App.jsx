@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+
 const Icon = ({ name, size = 20, className = "" }) => {
   const icons = {
     Home: (
@@ -1435,7 +1436,7 @@ function ScreenSabootSubmission({ issue, onBack, onSubmitSuccess }) {
         beforeImg: beforeImage,
         afterImg: afterImage
       }
-    };
+    }
 
     onSubmitSuccess(completedIssue);
   };
