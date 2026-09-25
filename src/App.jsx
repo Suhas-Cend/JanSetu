@@ -111,7 +111,7 @@ const INITIAL_ISSUES = [
       approved: true,
       coins: 450,
       beforeImg: "https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=600&q=80",
-      afterImg: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80"
+      afterImg: "https://www.earthtrekkers.com/wp-content/uploads/2020/06/Dharavi-.jpg.optimal.jpg"
     }
   },
   {
@@ -1008,7 +1008,7 @@ function ScreenPostAwaaz({ user, onCancel, onSubmit }) {
         approved: true,
         coins: 300,
         beforeImg: previewImage || "https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=600&q=80",
-        afterImg: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80"
+        afterImg: "https://www.earthtrekkers.com/wp-content/uploads/2020/06/Dharavi-.jpg.optimal.jpg"
       }
     };
 
@@ -1650,7 +1650,7 @@ function ScreenAIVerification({ issue, userRole, onBack }) {
     approved: true,
     coins: 450,
     beforeImg: issue.image,
-    afterImg: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80"
+    afterImg: "https://www.earthtrekkers.com/wp-content/uploads/2020/06/Dharavi-.jpg.optimal.jpg"
   };
 
   const isApproved = simulatedVerdict === 'high' ? verification.approved : false;
@@ -2219,5 +2219,7 @@ function ScreenProfile({ user, issues, onViewPramaan }) {
         </div>
       )}
     </div>
+  );
+}
   );
 }
