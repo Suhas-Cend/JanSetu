@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --color-primary: #1e293b;
@@ -10,6 +12,7 @@ body {
   color: #f3f4f6;
 }
 
+/* Map the Google fonts for the UI components */
 .font-bebas {
   font-family: 'Bebas Neue', sans-serif;
 }
