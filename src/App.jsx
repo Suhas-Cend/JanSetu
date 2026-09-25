@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { supabase } from './lib/supabaseClient';
 
 const Icon = ({ name, size = 20, className = "" }) => {
   const icons = {
@@ -224,6 +225,65 @@ export default function App() {
   const [activePramaanIssue, setActivePramaanIssue] = useState(null);
   const [issues, setIssues] = useState(INITIAL_ISSUES);
 
+  // SUPABASE INTEGRATION LOGIC
+  useEffect(() => {
+    async function fetchIssues() {
+      const { data, error } = await supabase
+        .from('issues')
+        .select('*, anumodan_votes(count)')
+        .order('created_at', { ascending: false });
+
+      // Overwrite static INITIAL_ISSUES with live DB data once it loads
+      if (!error && data && data.length > 0) {
+        setIssues(data);
+      }
+    }
+    fetchIssues();
+  }, []);
+
+  const handleAnumodanVote = async (id) => {
+    // 1. Optimistic UI Update (Screen updates instantly for good UX)
+    setIssues(prev => prev.map(issue => {
+      if (issue.id === id) {
+        const hasVoted = !issue.hasVoted;
+        return {
+          ...issue,
+          hasVoted,
+          anumodanCount: hasVoted ? issue.anumodanCount + 1 : issue.anumodanCount - 1
+        };
+      }
+      return issue;
+    }));
+
+    // 2. Supabase Integration
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return; // Silent return if not logged into Supabase Auth yet
+
+    const { error } = await supabase
+      .from('anumodan_votes')
+      .insert({ issue_id: id, user_id: user.id });
+      
+    if (error) console.error("Error casting vote:", error);
+  };
+
+  const uploadImage = async (file) => {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Math.random()}.${fileExt}`;
+    const filePath = `uploads/${fileName}`;
+
+    const { error } = await supabase.storage
+      .from('issue-media')
+      .upload(filePath, file);
+
+    if (error) throw error;
+
+    const { data } = supabase.storage
+      .from('issue-media')
+      .getPublicUrl(filePath);
+
+    return data.publicUrl;
+  };
+
   // Dynamic Google Font Injection for Bebas Neue & Lora
   useEffect(() => {
     const link = document.createElement('link');
@@ -276,20 +336,6 @@ export default function App() {
       setUser(citizenUser);
       setCurrentScreen('feed');
     }
-  };
-
-  const handleAnumodanVote = (id) => {
-    setIssues(prev => prev.map(issue => {
-      if (issue.id === id) {
-        const hasVoted = !issue.hasVoted;
-        return {
-          ...issue,
-          hasVoted,
-          anumodanCount: hasVoted ? issue.anumodanCount + 1 : issue.anumodanCount - 1
-        };
-      }
-      return issue;
-    }));
   };
 
   const handleClaimIssue = (id) => {
