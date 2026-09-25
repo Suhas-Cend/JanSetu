@@ -1,8 +1,4 @@
-import React from 'react';
-import AppLayout from './components/AppLayout';
-import { AwaazCard } from './components/AwaazCard';
-import { SabootForm } from './components/SabootForm';
-import { PramaanVerification } from './components/PramaanVerification';
+import React, { useState, useEffect, useRef } from 'react';
 const Icon = ({ name, size = 20, className = "" }) => {
   const icons = {
     Home: (
