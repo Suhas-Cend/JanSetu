@@ -8,15 +8,12 @@
     "build": "vite build",
     "preview": "vite preview"
   },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+"dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "lucide-react": "latest",
-    "tailwindcss-animate": "latest"
+    "tailwindcss-animate": "latest",
+    "tailwindcss": "latest" 
   },
   "devDependencies": {
     "@types/react": "^18.3.31",
