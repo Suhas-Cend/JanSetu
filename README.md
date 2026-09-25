@@ -2,7 +2,7 @@
 
 > **One Problem. One Helper. The Right Solution.**
 
-![JanSetu - Bridging the Gap](https://media.istockphoto.com/id/513853167/vector/jigsaw-bridge.jpg?s=1024x1024&w=is&k=20&c=W92-6B_a_208ORfUISN78o8DjpfJEYjjLfXkRwoVNFs=)
+![JanSetu - Bridging the Gap](https://files.catbox.moe/nywbgq.png)
 
 ---
 
