@@ -1512,10 +1512,11 @@ function ScreenAIVerification({ issue, userRole, onBack }) {
     async function runAIAudit() {
       try {
         setStep(1); 
-        const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+        // 👇 HARDCODED FALLBACK: Paste your actual Gemini API key inside the quotes below!
+        const apiKey = import.meta.env.VITE_GEMINI_API_KEY || "AQ.Ab8RN6IFCjdf_xKGGV4ZSEquj2WWrNcmf_QPWsDCHC2SsQT2Ig";
         
-        if (!apiKey) {
-          throw new Error("Missing VITE_GEMINI_API_KEY in .env file");
+        if (!apiKey || apiKey === "AQ.Ab8RN6IFCjdf_xKGGV4ZSEquj2WWrNcmf_QPWsDCHC2SsQT2Ig") {
+          throw new Error("Missing Gemini API Key. Please replace AQ.Ab8RN6IFCjdf_xKGGV4ZSEquj2WWrNcmf_QPWsDCHC2SsQT2Ig in App.jsx.");
         }
 
         const beforeBase64 = await fetchImageAsBase64(verification.beforeImg);
@@ -1609,7 +1610,6 @@ function ScreenAIVerification({ issue, userRole, onBack }) {
         <div className="p-6 bg-[#F44336]/10 border border-[#F44336] rounded-xl text-[#F44336]">
           <h3 className="font-bebas text-[24px]">AI Connection Failed</h3>
           <p className="text-[14px] mt-2 font-mono">{aiError}</p>
-          <p className="text-[14px] mt-4">Did you remember to add your VITE_GEMINI_API_KEY to the .env file and restart the server?</p>
         </div>
       ) : (
         <div className="space-y-4">
