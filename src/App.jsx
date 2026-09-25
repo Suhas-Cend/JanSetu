@@ -75,7 +75,7 @@ const Icon = ({ name, size = 20, className = "" }) => {
     ),
     Layers: (
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className={className}>
-        <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
+        <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 17 22 12"/>
       </svg>
     ),
     RefreshCw: (
@@ -87,6 +87,7 @@ const Icon = ({ name, size = 20, className = "" }) => {
   return icons[name] || null;
 };
 
+// Fallback issues used while real database loads or is empty
 const INITIAL_ISSUES = [
   {
     id: "ISS-9821",
@@ -101,100 +102,7 @@ const INITIAL_ISSUES = [
     status: "Pending",
     claimedBy: null,
     image: "https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=800&q=80",
-    date: "23 Sep 2026",
-    verificationData: {
-      locationOk: true,
-      timestampOk: true,
-      reportedCost: 4800,
-      benchCost: 6500,
-      tampering: "None Detected",
-      confidence: 96,
-      approved: true,
-      coins: 450,
-      beforeImg: "https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=600&q=80",
-      afterImg: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80"
-    }
-  },
-  {
-    id: "ISS-9822",
-    title: "Burst Pipeline Flooding Residential By-lane",
-    description: "Drinking water main supply line cracked during cable excavation. Clean water has been overflowing into basements for 18 hours.",
-    category: "Water",
-    location: "Lane 4, BTM Layout 2nd Stage, Ward 176",
-    severity: "Major",
-    anumodanCount: 89,
-    hasVoted: false,
-    isTracked: false,
-    status: "Claimed",
-    claimedBy: "EMP-BLR-4091",
-    image: "https://images.unsplash.com/photo-1541888946425-d0fbb1861563?auto=format&fit=crop&w=800&q=80",
-    date: "22 Sep 2026",
-    verificationData: {
-      locationOk: true,
-      timestampOk: true,
-      reportedCost: 12400,
-      benchCost: 11000,
-      tampering: "None Detected",
-      confidence: 91,
-      approved: true,
-      coins: 380,
-      beforeImg: "https://images.unsplash.com/photo-1541888946425-d0fbb1861563?auto=format&fit=crop&w=600&q=80",
-      afterImg: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80"
-    }
-  },
-  {
-    id: "ISS-9823",
-    title: "Garbage Dump Accumulation outside Primary School Gate",
-    description: "Community waste bin missing for 3 weeks leading to open burning of solid garbage right next to government school entrance.",
-    category: "Garbage",
-    location: "Gandhi Nagar Model School, Ward 94",
-    severity: "Moderate",
-    anumodanCount: 64,
-    hasVoted: false,
-    isTracked: true,
-    status: "Pending",
-    claimedBy: null,
-    image: "https://images.unsplash.com/photo-1605600659908-0ef719419d41?auto=format&fit=crop&w=800&q=80",
-    date: "21 Sep 2026",
-    verificationData: {
-      locationOk: true,
-      timestampOk: false,
-      reportedCost: 18000,
-      benchCost: 7500,
-      tampering: "Detected (Exif Conflict)",
-      confidence: 42,
-      approved: false,
-      coins: 0,
-      beforeImg: "https://images.unsplash.com/photo-1605600659908-0ef719419d41?auto=format&fit=crop&w=600&q=80",
-      afterImg: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=600&q=80"
-    }
-  },
-  {
-    id: "ISS-9824",
-    title: "Continuous 5-Pole Streetlight Outage on Ring Road Curve",
-    description: "High collision prone hairpin turn has been pitch black since Monday thunderstorm, risking pedestrians and freight trucks.",
-    category: "Streetlight",
-    location: "Outer Ring Road Junction 14, Ward 85",
-    severity: "Minor",
-    anumodanCount: 31,
-    hasVoted: false,
-    isTracked: false,
-    status: "Completed",
-    claimedBy: "EMP-BLR-4091",
-    image: "https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=800&q=80",
-    date: "20 Sep 2026",
-    verificationData: {
-      locationOk: true,
-      timestampOk: true,
-      reportedCost: 3100,
-      benchCost: 3500,
-      tampering: "None Detected",
-      confidence: 98,
-      approved: true,
-      coins: 200,
-      beforeImg: "https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=600&q=80",
-      afterImg: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80"
-    }
+    date: "23 Sep 2026"
   }
 ];
 
@@ -202,10 +110,7 @@ const LEADERBOARD_OFFICERS = [
   { rank: 1, name: "Er. Ramesh Kulkarni", ward: "Ward 112 (East Zone - PWD)", resolved: 142, coins: 18450, efficiency: 98.4 },
   { rank: 2, name: "Pooja Deshmukh", ward: "Ward 176 (South Water Supply)", resolved: 129, coins: 16900, efficiency: 96.1 },
   { rank: 3, name: "Vikas Narayan", ward: "Ward 94 (Central Solid Waste)", resolved: 114, coins: 14750, efficiency: 94.7 },
-  { rank: 4, name: "Suresh Pillai", ward: "Ward 85 (Infra & Electrical)", resolved: 98, coins: 12800, efficiency: 92.3 },
-  { rank: 5, name: "Ananya Sen", ward: "Ward 64 (Stormwater Drainage)", resolved: 87, coins: 11200, efficiency: 90.8 },
-  { rank: 6, name: "K. Mohan Das", ward: "Ward 103 (Sanitation Hub)", resolved: 73, coins: 9600, efficiency: 89.2 },
-  { rank: 7, name: "Harpreet Singh", ward: "Ward 42 (Bridges & Flyovers)", resolved: 65, coins: 8100, efficiency: 87.5 }
+  { rank: 4, name: "Suresh Pillai", ward: "Ward 85 (Infra & Electrical)", resolved: 98, coins: 12800, efficiency: 92.3 }
 ];
 
 const ADDRESS_SUGGESTIONS = [
@@ -213,19 +118,50 @@ const ADDRESS_SUGGESTIONS = [
   "BTM Layout 2nd Stage, Outer Ring Road Service Lane",
   "Gandhi Nagar 3rd Main, near Government Primary School",
   "Outer Ring Road Junction 14, Bellandur Flyover Downramp",
-  "Koramangala 5th Block, Jyoti Nivas College Road",
-  "Jayanagar 4th T Block, 9th Main Road Bus Shelter"
+  "Koramangala 5th Block, Jyoti Nivas College Road"
 ];
 
 export default function App() {
-  // Session User: role is strictly 'citizen' or 'officer'
   const [user, setUser] = useState(null);
-  const [currentScreen, setCurrentScreen] = useState('auth'); // 'auth' | 'feed' | 'post' | 'taskboard' | 'saboot' | 'pramaan' | 'ledger' | 'profile'
+  const [currentScreen, setCurrentScreen] = useState('auth'); 
   const [activeSabootIssue, setActiveSabootIssue] = useState(null);
   const [activePramaanIssue, setActivePramaanIssue] = useState(null);
   const [issues, setIssues] = useState(INITIAL_ISSUES);
 
-  // SUPABASE INTEGRATION LOGIC
+  // 1. PERSISTENT AUTHENTICATION LISTENER
+  useEffect(() => {
+    // Check active session on initial page load
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) handleSessionUser(session.user);
+    });
+
+    // Listen for login/logout state changes across tabs/refreshes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user) {
+        handleSessionUser(session.user);
+      } else {
+        setUser(null);
+        setCurrentScreen('auth');
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleSessionUser = (authUser) => {
+    // Extract metadata saved during registration
+    const userProfile = {
+      id: authUser.id,
+      email: authUser.email,
+      name: authUser.user_metadata?.name || 'Citizen',
+      role: authUser.user_metadata?.role || 'citizen',
+      alwaysAnonymous: authUser.user_metadata?.always_anonymous || false
+    };
+    setUser(userProfile);
+    setCurrentScreen(userProfile.role === 'officer' ? 'taskboard' : 'feed');
+  };
+
+  // 2. FETCH REAL ISSUES FROM SUPABASE
   useEffect(() => {
     async function fetchIssues() {
       const { data, error } = await supabase
@@ -233,16 +169,90 @@ export default function App() {
         .select('*, anumodan_votes(count)')
         .order('created_at', { ascending: false });
 
-      // Overwrite static INITIAL_ISSUES with live DB data once it loads
       if (!error && data && data.length > 0) {
-        setIssues(data);
+        // Format DB columns to match UI expectations
+        const formattedData = data.map(row => ({
+          ...row,
+          image: row.image_url || row.image, 
+          anumodanCount: row.anumodan_votes?.[0]?.count || 0,
+          date: new Date(row.created_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }),
+          hasVoted: false, 
+          isTracked: false
+        }));
+        setIssues(formattedData);
       }
     }
-    fetchIssues();
-  }, []);
+    
+    // Only fetch if a user is logged in
+    if (user) {
+      fetchIssues();
+    }
+  }, [user]);
+
+  // 3. HANDLE PERMANENT POST SUBMISSION WITH STORAGE
+  const handlePostSubmit = async (newIssueObj, rawFile) => {
+    try {
+      let publicImageUrl = newIssueObj.image;
+
+      // Upload photo permanently to Supabase Storage if a real file was selected
+      if (rawFile) {
+        const fileExt = rawFile.name.split('.').pop();
+        const fileName = `${Date.now()}_${Math.random()}.${fileExt}`;
+        const filePath = `uploads/${fileName}`;
+
+        const { error: uploadError } = await supabase.storage
+          .from('issue-media')
+          .upload(filePath, rawFile);
+
+        if (uploadError) throw uploadError;
+
+        const { data: urlData } = supabase.storage
+          .from('issue-media')
+          .getPublicUrl(filePath);
+
+        publicImageUrl = urlData.publicUrl;
+      }
+
+      // Permanently write row into Supabase 'issues' table
+      const { data: insertedIssue, error: dbError } = await supabase
+        .from('issues')
+        .insert([
+          {
+            title: newIssueObj.title,
+            description: newIssueObj.description,
+            category: newIssueObj.category,
+            location: newIssueObj.location,
+            severity: newIssueObj.severity,
+            image_url: publicImageUrl,
+            created_by: user.id,
+            status: "Pending"
+          }
+        ])
+        .select()
+        .single();
+
+      if (dbError) throw dbError;
+
+      // Format for UI and unshift to state
+      const formattedInsert = {
+        ...insertedIssue,
+        image: insertedIssue.image_url,
+        anumodanCount: 0,
+        hasVoted: true,
+        isTracked: true,
+        date: "Just Now"
+      };
+
+      setIssues((prev) => [formattedInsert, ...prev]);
+      setCurrentScreen('feed');
+    } catch (err) {
+      console.error('Failed to permanently store issue:', err);
+      alert(`Upload Error: ${err.message}`);
+    }
+  };
 
   const handleAnumodanVote = async (id) => {
-    // 1. Optimistic UI Update (Screen updates instantly for good UX)
+    // Optimistic UI Update
     setIssues(prev => prev.map(issue => {
       if (issue.id === id) {
         const hasVoted = !issue.hasVoted;
@@ -255,10 +265,7 @@ export default function App() {
       return issue;
     }));
 
-    // 2. Supabase Integration
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return; // Silent return if not logged into Supabase Auth yet
-
+    // Real Supabase Insert
     const { error } = await supabase
       .from('anumodan_votes')
       .insert({ issue_id: id, user_id: user.id });
@@ -266,25 +273,11 @@ export default function App() {
     if (error) console.error("Error casting vote:", error);
   };
 
-  const uploadImage = async (file) => {
-    const fileExt = file.name.split('.').pop();
-    const fileName = `${Math.random()}.${fileExt}`;
-    const filePath = `uploads/${fileName}`;
-
-    const { error } = await supabase.storage
-      .from('issue-media')
-      .upload(filePath, file);
-
-    if (error) throw error;
-
-    const { data } = supabase.storage
-      .from('issue-media')
-      .getPublicUrl(filePath);
-
-    return data.publicUrl;
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
   };
 
-  // Dynamic Google Font Injection for Bebas Neue & Lora
+  // Dynamic Google Font Injection
   useEffect(() => {
     const link = document.createElement('link');
     link.href = 'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400..700;1,400..700&display=swap';
@@ -297,54 +290,13 @@ export default function App() {
     };
   }, []);
 
-  const handleLogin = (userData) => {
-    setUser(userData);
-    if (userData.role === 'officer') {
-      // Officers are strictly routed to Screen 4 (Task Board)
-      setCurrentScreen('taskboard');
-    } else {
-      // Citizens are strictly routed to Screen 2 (Awaaz Feed)
-      setCurrentScreen('feed');
-    }
-  };
-
-  const handleLogout = () => {
-    setUser(null);
-    setCurrentScreen('auth');
-    setActiveSabootIssue(null);
-    setActivePramaanIssue(null);
-  };
-
-  // Instant Persona Switcher for Hackathon Judges
-  const handleInstantSwitchRole = () => {
-    if (user.role === 'citizen') {
-      const officerUser = {
-        role: 'officer',
-        name: 'Er. Ramesh Kulkarni',
-        id: 'EMP-BLR-4091',
-        alwaysAnonymous: false
-      };
-      setUser(officerUser);
-      setCurrentScreen('taskboard');
-    } else {
-      const citizenUser = {
-        role: 'citizen',
-        name: 'Aarav Sharma',
-        id: '+91 98451 22019',
-        alwaysAnonymous: false
-      };
-      setUser(citizenUser);
-      setCurrentScreen('feed');
-    }
-  };
-
   const handleClaimIssue = (id) => {
     setIssues(prev => prev.map(issue => {
       if (issue.id === id) {
         return {
           ...issue,
           status: 'Claimed',
-          claimedBy: user?.id || 'EMP-BLR-4091'
+          claimedBy: user?.id
         };
       }
       return issue;
@@ -361,14 +313,8 @@ export default function App() {
     setCurrentScreen('pramaan');
   };
 
-  const handlePostSubmit = (newIssue) => {
-    setIssues(prev => [newIssue, ...prev]);
-    setCurrentScreen('feed');
-  };
-
   return (
     <div className="min-h-screen bg-[#06141B] text-[#CCD0CF] flex antialiased select-none font-['Lora',serif]">
-      {/* GLOBAL THEME TOKENS AND TACTILE FEEDBACK STYLES */}
       <style>{`
         .font-bebas {
           font-family: 'Bebas Neue', sans-serif;
@@ -392,12 +338,10 @@ export default function App() {
         }
       `}</style>
 
-      {}
       {currentScreen === 'auth' || !user ? (
-        <ScreenAuth onLogin={handleLogin} />
+        <ScreenAuth />
       ) : (
         <div className="flex w-full min-h-screen">
-          {/* FIXED DESKTOP SIDEBAR (~260px) */}
           <Sidebar
             user={user}
             currentScreen={currentScreen}
@@ -406,9 +350,7 @@ export default function App() {
             onSelectPramaanDefault={() => handleOpenPramaan(issues[0])}
           />
 
-          {/* MAIN 12-COLUMN CONTAINER WITH PERSISTENT JUDGE PERSONA SWITCHER */}
           <div className="flex-1 ml-[260px] flex flex-col min-h-screen bg-[#06141B]">
-            {/* PERSISTENT TOP HEADER BAR WITH INSTANT ROLE BADGE & 1-CLICK SWITCHER */}
             <header className="sticky top-0 z-30 bg-[#11212D]/95 backdrop-blur border-b border-[#9BA8AB]/20 px-8 py-3.5 flex items-center justify-between card-shadow">
               <div className="flex items-center gap-3">
                 <span className="text-[12px] uppercase text-[#9BA8AB] font-semibold tracking-wider">
@@ -420,29 +362,12 @@ export default function App() {
                     : 'bg-[#6BBF4A]/20 text-[#6BBF4A] border border-[#6BBF4A]/40'
                 }`}>
                   <span className={`w-2 h-2 rounded-full ${user.role === 'officer' ? 'bg-[#FF9800]' : 'bg-[#6BBF4A]'}`} />
-                  {user.role === 'officer' ? 'MUNICIPAL OFFICER MODE (Er. Ramesh)' : 'CITIZEN MODE (Aarav Sharma)'}
+                  {user.role === 'officer' ? `OFFICER MODE (${user.name})` : `CITIZEN MODE (${user.name})`}
                 </span>
-              </div>
-
-              {/* 1-Click Fast Persona Switcher Button */}
-              <div className="flex items-center gap-3">
-                <span className="text-[11px] text-[#9BA8AB] uppercase tracking-wider hidden xl:inline">
-                  Judge Testing Tool:
-                </span>
-                <button
-                  onClick={handleInstantSwitchRole}
-                  className="px-3.5 py-1.5 bg-[#253745] hover:bg-[#4A5C6A] text-[#CCD0CF] rounded-lg text-[12px] uppercase font-bold flex items-center gap-2 border border-[#9BA8AB]/20 btn-interact"
-                  title="Instantly toggle between Citizen and Officer interfaces without logging out"
-                >
-                  <Icon name="RefreshCw" size={14} className="text-[#6BBF4A]" />
-                  <span>Switch to {user.role === 'citizen' ? 'Officer View (Task Board)' : 'Citizen View (Awaaz Feed)'}</span>
-                </button>
               </div>
             </header>
 
-            {/* SCREEN VIEWPORT ROUTER */}
             <main className="flex-1 p-8 max-w-[1440px] w-full mx-auto">
-              {/* SCREEN 2: AWAAZ FEED (CITIZEN ONLY) */}
               {currentScreen === 'feed' && (
                 <ScreenAwaazFeed
                   issues={issues}
@@ -450,7 +375,6 @@ export default function App() {
                 />
               )}
 
-              {/* SCREEN 3: POST AWAAZ */}
               {currentScreen === 'post' && (
                 <ScreenPostAwaaz
                   user={user}
@@ -459,7 +383,6 @@ export default function App() {
                 />
               )}
 
-              {/* SCREEN 4 (PART A): OFFICER TASK BOARD */}
               {currentScreen === 'taskboard' && (
                 <ScreenOfficerTaskBoard
                   issues={issues}
@@ -469,7 +392,6 @@ export default function App() {
                 />
               )}
 
-              {/* SCREEN 4 (PART B): SABOOT SUBMISSION */}
               {currentScreen === 'saboot' && activeSabootIssue && (
                 <ScreenSabootSubmission
                   issue={activeSabootIssue}
@@ -481,7 +403,6 @@ export default function App() {
                 />
               )}
 
-              {/* SCREEN 5: AI VERIFICATION (PRAMAAN AGENT) */}
               {currentScreen === 'pramaan' && (
                 <ScreenAIVerification
                   issue={activePramaanIssue || issues[0]}
@@ -496,12 +417,10 @@ export default function App() {
                 />
               )}
 
-              {/* SCREEN 6: PUBLIC TEAM LEDGER */}
               {currentScreen === 'ledger' && (
                 <ScreenPublicLedger officers={LEADERBOARD_OFFICERS} />
               )}
 
-              {/* SCREEN 7: ROLE-DEPENDENT PROFILE */}
               {currentScreen === 'profile' && (
                 <ScreenProfile
                   user={user}
@@ -520,7 +439,6 @@ export default function App() {
 function Sidebar({ user, currentScreen, onNavigate, onLogout, onSelectPramaanDefault }) {
   const isCitizen = user.role === 'citizen';
 
-  // Strict citizen navigation items
   const citizenNav = [
     { id: 'feed', label: 'Awaaz Feed', icon: 'Home' },
     { id: 'post', label: 'Post Awaaz', icon: 'PlusCircle' },
@@ -529,7 +447,6 @@ function Sidebar({ user, currentScreen, onNavigate, onLogout, onSelectPramaanDef
     { id: 'profile', label: 'Citizen Profile', icon: 'User' },
   ];
 
-  // Strict officer navigation items (officers never see Awaaz Feed)
   const officerNav = [
     { id: 'taskboard', label: 'Task Board', icon: 'Home' },
     { id: 'pramaan', label: 'AI Verification', icon: 'ShieldCheck', action: onSelectPramaanDefault },
@@ -542,7 +459,6 @@ function Sidebar({ user, currentScreen, onNavigate, onLogout, onSelectPramaanDef
   return (
     <aside className="fixed left-0 top-0 bottom-0 w-[260px] bg-[#4A5C6A] flex flex-col justify-between p-5 z-40 border-r border-[#9BA8AB]/20 card-shadow">
       <div>
-        {/* LOGO AREA */}
         <div className="flex items-center gap-3 px-2 py-4 mb-5 border-b border-[#9BA8AB]/20">
           <div className="w-10 h-10 rounded-lg bg-[#11212D] flex items-center justify-center border border-[#9BA8AB]/30 text-[#6BBF4A]">
             <Icon name="Layers" size={22} />
@@ -557,7 +473,6 @@ function Sidebar({ user, currentScreen, onNavigate, onLogout, onSelectPramaanDef
           </div>
         </div>
 
-        {/* ROLE INDICATOR BADGE */}
         <div className="mb-6 px-3 py-2 rounded-lg bg-[#253745]/80 border border-[#9BA8AB]/20 flex items-center justify-between">
           <span className="text-[11px] uppercase text-[#9BA8AB] font-semibold">Role View</span>
           <span className={`text-[11px] font-bold uppercase px-2 py-0.5 rounded ${
@@ -567,7 +482,6 @@ function Sidebar({ user, currentScreen, onNavigate, onLogout, onSelectPramaanDef
           </span>
         </div>
 
-        {/* NAVIGATION LIST */}
         <nav className="space-y-1.5">
           {navItems.map((item) => {
             const isActive = currentScreen === item.id;
@@ -593,7 +507,6 @@ function Sidebar({ user, currentScreen, onNavigate, onLogout, onSelectPramaanDef
         </nav>
       </div>
 
-      {/* FOOTER USER SUMMARY & LOGOUT */}
       <div className="pt-4 border-t border-[#9BA8AB]/20">
         <div className="flex items-center gap-3 px-2 py-2 mb-2">
           <div className="w-10 h-10 rounded-full bg-[#253745] border border-[#9BA8AB]/30 flex items-center justify-center text-[#CCD0CF] font-bold text-sm">
@@ -604,7 +517,7 @@ function Sidebar({ user, currentScreen, onNavigate, onLogout, onSelectPramaanDef
               {user.name}
             </p>
             <p className="text-[11px] text-[#9BA8AB] truncate font-mono">
-              {user.id}
+              {user.email}
             </p>
           </div>
         </div>
@@ -621,58 +534,50 @@ function Sidebar({ user, currentScreen, onNavigate, onLogout, onSelectPramaanDef
   );
 }
 
-function ScreenAuth({ onLogin }) {
-  const [role, setRole] = useState('citizen'); // 'citizen' | 'officer'
-  const [mode, setMode] = useState('signin');  // 'signin' | 'create'
+function ScreenAuth() {
+  const [role, setRole] = useState('citizen'); 
+  const [mode, setMode] = useState('signin');  
 
   const [name, setName] = useState('');
-  const [identifier, setIdentifier] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [alwaysAnonymous, setAlwaysAnonymous] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(null);
 
-  // Core Continue Submit Action
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (role === 'officer') {
-      onLogin({
-        role: 'officer',
-        name: name || 'Er. Ramesh Kulkarni',
-        id: identifier || 'EMP-BLR-4091',
-        alwaysAnonymous: false
-      });
-    } else {
-      onLogin({
-        role: 'citizen',
-        name: name || 'Aarav Sharma',
-        id: identifier || '+91 98451 22019',
-        alwaysAnonymous
-      });
+    setLoading(true);
+    setErrorMsg(null);
+
+    try {
+      if (mode === 'create') {
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: { name, role, always_anonymous: alwaysAnonymous }
+          }
+        });
+        if (error) throw error;
+        alert("Account Created! You are now logged in.");
+      } else {
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password
+        });
+        if (error) throw error;
+      }
+    } catch (error) {
+      setErrorMsg(error.message);
+    } finally {
+      setLoading(false);
     }
-  };
-
-  // Dedicated Fast Demo Handlers for Evaluators
-  const handleCitizenDemo = () => {
-    onLogin({
-      role: 'citizen',
-      name: 'Aarav Sharma (Citizen Demo)',
-      id: '+91 98451 22019',
-      alwaysAnonymous: false
-    });
-  };
-
-  const handleOfficerDemo = () => {
-    onLogin({
-      role: 'officer',
-      name: 'Er. Ramesh Kulkarni (Officer Demo)',
-      id: 'EMP-BLR-4091',
-      alwaysAnonymous: false
-    });
   };
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center p-6 bg-[#06141B]">
       <div className="w-full max-w-[480px] bg-[#11212D] border border-[#9BA8AB]/20 rounded-xl p-8 card-shadow">
-        {/* LOGO & HEADING */}
         <div className="text-center mb-6">
           <div className="w-14 h-14 mx-auto rounded-xl bg-[#253745] flex items-center justify-center border border-[#9BA8AB]/30 text-[#6BBF4A] mb-3">
             <Icon name="Layers" size={32} />
@@ -685,7 +590,6 @@ function ScreenAuth({ onLogin }) {
           </p>
         </div>
 
-        {/* 1. ROLE TOGGLE */}
         <div className="grid grid-cols-2 p-1 bg-[#06141B] rounded-lg border border-[#9BA8AB]/20 mb-5">
           <button
             type="button"
@@ -707,11 +611,10 @@ function ScreenAuth({ onLogin }) {
           </button>
         </div>
 
-        {/* 2. MODE SWITCHER */}
         <div className="flex border-b border-[#253745] mb-6">
           <button
             type="button"
-            onClick={() => setMode('signin')}
+            onClick={() => { setMode('signin'); setErrorMsg(null); }}
             className={`flex-1 pb-3 text-center text-[15px] uppercase font-semibold border-b-2 btn-interact ${
               mode === 'signin'
                 ? 'border-[#6BBF4A] text-[#CCD0CF]'
@@ -722,7 +625,7 @@ function ScreenAuth({ onLogin }) {
           </button>
           <button
             type="button"
-            onClick={() => setMode('create')}
+            onClick={() => { setMode('create'); setErrorMsg(null); }}
             className={`flex-1 pb-3 text-center text-[15px] uppercase font-semibold border-b-2 btn-interact ${
               mode === 'create'
                 ? 'border-[#6BBF4A] text-[#CCD0CF]'
@@ -733,7 +636,12 @@ function ScreenAuth({ onLogin }) {
           </button>
         </div>
 
-        {/* 3. CONDITIONAL FORM FIELDS */}
+        {errorMsg && (
+          <div className="mb-4 p-3 rounded-lg bg-[#F44336]/20 border border-[#F44336] text-[#F44336] text-[13px] text-center">
+            {errorMsg}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="space-y-4">
           {mode === 'create' && (
             <div>
@@ -753,14 +661,14 @@ function ScreenAuth({ onLogin }) {
 
           <div>
             <label className="block text-[12px] uppercase text-[#9BA8AB] mb-1 font-semibold">
-              {role === 'citizen' ? 'Mobile / Email' : 'Official Employee ID / Email'}
+              Email Address
             </label>
             <input
-              type="text"
+              type="email"
               required
-              value={identifier}
-              onChange={(e) => setIdentifier(e.target.value)}
-              placeholder={role === 'citizen' ? "+91 98451 22019" : "EMP-BLR-4091"}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="name@domain.com"
               className="w-full bg-[#06141B] border border-[#9BA8AB]/30 rounded-lg px-3.5 py-2.5 text-[#CCD0CF] focus:outline-none focus:border-[#6BBF4A] text-[15px]"
             />
           </div>
@@ -779,7 +687,6 @@ function ScreenAuth({ onLogin }) {
             />
           </div>
 
-          {/* Citizen Anonymous Post Setting Switch */}
           {role === 'citizen' && mode === 'create' && (
             <div className="flex items-center justify-between p-3 bg-[#06141B] border border-[#9BA8AB]/20 rounded-lg mt-2">
               <div>
@@ -796,52 +703,25 @@ function ScreenAuth({ onLogin }) {
             </div>
           )}
 
-          {/* 4. SUBMIT BUTTON */}
           <button
             type="submit"
-            className="w-full mt-4 py-3 bg-[#4A5C6A] hover:bg-[#6BBF4A] hover:text-black text-[#CCD0CF] font-semibold text-[16px] uppercase tracking-wider rounded-lg btn-interact border border-[#9BA8AB]/30 card-shadow"
+            disabled={loading}
+            className="w-full mt-4 py-3 bg-[#4A5C6A] hover:bg-[#6BBF4A] hover:text-black text-[#CCD0CF] font-semibold text-[16px] uppercase tracking-wider rounded-lg btn-interact border border-[#9BA8AB]/30 card-shadow disabled:opacity-50"
           >
-            Continue
+            {loading ? 'Processing...' : (mode === 'create' ? 'Create Account' : 'Sign In')}
           </button>
         </form>
-
-        {/* 5. JUDGE DEMO FAST ACCESS BUTTONS */}
-        <div className="mt-8 pt-6 border-t border-[#9BA8AB]/20 text-center">
-          <span className="text-[11px] uppercase tracking-widest text-[#9BA8AB] font-bold block mb-3">
-            ⚖️ Judge & Evaluator Fast Demo Access
-          </span>
-          <div className="grid grid-cols-2 gap-3">
-            <button
-              type="button"
-              onClick={handleCitizenDemo}
-              className="py-2.5 px-3 bg-[#253745] hover:bg-[#6BBF4A] hover:text-black text-[#CCD0CF] rounded-lg text-[13px] uppercase font-bold btn-interact border border-[#9BA8AB]/20 flex items-center justify-center gap-1.5"
-            >
-              Demo — Citizen
-            </button>
-            <button
-              type="button"
-              onClick={handleOfficerDemo}
-              className="py-2.5 px-3 bg-[#253745] hover:bg-[#FF9800] hover:text-black text-[#CCD0CF] rounded-lg text-[13px] uppercase font-bold btn-interact border border-[#9BA8AB]/20 flex items-center justify-center gap-1.5"
-            >
-              Demo — Officer
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );
 }
 
 function ScreenAwaazFeed({ issues, onAnumodan }) {
-  const [tab, setTab] = useState('trending'); // 'trending' | 'tracked'
-
-  const displayedIssues = tab === 'trending'
-    ? issues
-    : issues.filter(i => i.isTracked);
+  const [tab, setTab] = useState('trending'); 
+  const displayedIssues = tab === 'trending' ? issues : issues.filter(i => i.isTracked);
 
   return (
     <div className="w-full">
-      {/* HEADER & TOGGLE */}
       <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#253745]">
         <div>
           <h1 className="font-bebas text-[32px] text-[#CCD0CF] tracking-wide m-0">
@@ -852,14 +732,11 @@ function ScreenAwaazFeed({ issues, onAnumodan }) {
           </p>
         </div>
 
-        {/* Tab Switcher */}
         <div className="flex bg-[#11212D] border border-[#9BA8AB]/20 rounded-lg p-1">
           <button
             onClick={() => setTab('trending')}
             className={`px-5 py-2 text-[14px] uppercase font-semibold rounded-md btn-interact ${
-              tab === 'trending'
-                ? 'bg-[#4A5C6A] text-[#CCD0CF] shadow'
-                : 'text-[#9BA8AB] hover:text-[#CCD0CF]'
+              tab === 'trending' ? 'bg-[#4A5C6A] text-[#CCD0CF] shadow' : 'text-[#9BA8AB] hover:text-[#CCD0CF]'
             }`}
           >
             Trending Issues ({issues.length})
@@ -867,9 +744,7 @@ function ScreenAwaazFeed({ issues, onAnumodan }) {
           <button
             onClick={() => setTab('tracked')}
             className={`px-5 py-2 text-[14px] uppercase font-semibold rounded-md btn-interact ${
-              tab === 'tracked'
-                ? 'bg-[#4A5C6A] text-[#CCD0CF] shadow'
-                : 'text-[#9BA8AB] hover:text-[#CCD0CF]'
+              tab === 'tracked' ? 'bg-[#4A5C6A] text-[#CCD0CF] shadow' : 'text-[#9BA8AB] hover:text-[#CCD0CF]'
             }`}
           >
             My Tracked Issues ({issues.filter(i => i.isTracked).length})
@@ -877,7 +752,6 @@ function ScreenAwaazFeed({ issues, onAnumodan }) {
         </div>
       </div>
 
-      {/* FEED LIST (Shows 1 full card + ~50% peek of next card) */}
       {displayedIssues.length === 0 ? (
         <div className="bg-[#11212D] rounded-xl border border-[#9BA8AB]/15 p-12 text-center my-6">
           <div className="w-12 h-12 mx-auto rounded-full bg-[#253745] flex items-center justify-center text-[#9BA8AB] mb-3">
@@ -895,18 +769,13 @@ function ScreenAwaazFeed({ issues, onAnumodan }) {
       ) : (
         <div className="space-y-6 max-h-[760px] overflow-y-auto pr-3 scrollbar-thin scrollbar-thumb-[#253745]">
           {displayedIssues.map((issue) => (
-            <div
-              key={issue.id}
-              className="bg-[#11212D] border border-[#9BA8AB]/15 rounded-xl overflow-hidden card-shadow flex flex-col"
-            >
-              {/* LARGE IMAGE AREA */}
+            <div key={issue.id} className="bg-[#11212D] border border-[#9BA8AB]/15 rounded-xl overflow-hidden card-shadow flex flex-col">
               <div className="relative h-72 w-full bg-[#06141B] overflow-hidden">
                 <img
                   src={issue.image}
                   alt={issue.title}
                   className="w-full h-full object-cover object-center filter brightness-95 hover:scale-105 transition-transform duration-500"
                 />
-                {/* CATEGORY & SEVERITY TAGS */}
                 <div className="absolute top-4 left-4 flex gap-2">
                   <span className="px-3 py-1 bg-[#11212D]/90 backdrop-blur-md border border-[#9BA8AB]/30 text-[#CCD0CF] text-[12px] uppercase font-semibold rounded-md">
                     {issue.category}
@@ -929,7 +798,6 @@ function ScreenAwaazFeed({ issues, onAnumodan }) {
                 </div>
               </div>
 
-              {/* CARD BODY */}
               <div className="p-6">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
@@ -947,7 +815,6 @@ function ScreenAwaazFeed({ issues, onAnumodan }) {
                     </p>
                   </div>
 
-                  {/* ANUMODAN CONTROL + BADGE */}
                   <div className="flex items-center gap-2 flex-shrink-0 self-center pl-4 border-l border-[#253745]">
                     <button
                       onClick={() => onAnumodan(issue.id)}
@@ -961,7 +828,6 @@ function ScreenAwaazFeed({ issues, onAnumodan }) {
                       <span>{issue.hasVoted ? 'Anumodit' : '🔥 Anumodan'}</span>
                     </button>
 
-                    {/* Numeric Count Badge */}
                     <div className="px-3.5 py-2.5 bg-[#06141B] border border-[#9BA8AB]/20 rounded-lg text-center min-w-[54px]">
                       <span className="block font-bebas text-[18px] text-[#FF9800] leading-none">
                         {issue.anumodanCount}
@@ -987,10 +853,11 @@ function ScreenPostAwaaz({ user, onCancel, onSubmit }) {
   const [geoLocation, setGeoLocation] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [previewImage, setPreviewImage] = useState(null);
+  const [rawFile, setRawFile] = useState(null);
 
   const [showAnonModal, setShowAnonModal] = useState(false);
   const [isAnonymous, setIsAnonymous] = useState(user?.alwaysAnonymous || false);
-  const [successToast, setSuccessToast] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const fileInputRef = useRef(null);
 
@@ -1015,8 +882,8 @@ function ScreenPostAwaaz({ user, onCancel, onSubmit }) {
   const handleImagePick = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const url = URL.createObjectURL(file);
-      setPreviewImage(url);
+      setRawFile(file);
+      setPreviewImage(URL.createObjectURL(file));
     }
   };
 
@@ -1026,41 +893,22 @@ function ScreenPostAwaaz({ user, onCancel, onSubmit }) {
     setShowAnonModal(true);
   };
 
-  const handleFinalSubmit = () => {
-    setShowAnonModal(false);
-    setSuccessToast(true);
-
+  const handleFinalSubmit = async () => {
+    setLoading(true);
+    
     const newIssueObj = {
-      id: `ISS-${Math.floor(1000 + Math.random() * 9000)}`,
       title: `${category} Defect reported at ${geoLocation.split(',')[0]}`,
       description,
       category,
       location: geoLocation,
-      severity: "Major",
-      anumodanCount: 1,
-      hasVoted: true,
-      isTracked: true,
-      status: "Pending",
-      claimedBy: null,
-      image: previewImage || "https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=800&q=80",
-      date: "Just Now",
-      verificationData: {
-        locationOk: true,
-        timestampOk: true,
-        reportedCost: 4500,
-        benchCost: 5000,
-        tampering: "None Detected",
-        confidence: 94,
-        approved: true,
-        coins: 300,
-        beforeImg: previewImage || "https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=600&q=80",
-        afterImg: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80"
-      }
+      severity: "Major"
     };
 
-    setTimeout(() => {
-      onSubmit(newIssueObj);
-    }, 1000);
+    // Pass the raw file directly to the parent App handler to handle Supabase Storage
+    await onSubmit(newIssueObj, rawFile);
+    
+    setLoading(false);
+    setShowAnonModal(false);
   };
 
   return (
@@ -1082,18 +930,7 @@ function ScreenPostAwaaz({ user, onCancel, onSubmit }) {
         </button>
       </div>
 
-      {successToast && (
-        <div className="mb-6 p-4 rounded-xl bg-[#6BBF4A]/20 border border-[#6BBF4A] text-[#6BBF4A] flex items-center gap-3">
-          <Icon name="CheckCircle2" size={24} />
-          <div>
-            <p className="font-semibold text-[15px]">Awaaz Published Successfully!</p>
-            <p className="text-[13px] text-[#CCD0CF]">Indexing on municipal feed and generating cryptographic timestamp...</p>
-          </div>
-        </div>
-      )}
-
       <form onSubmit={handleFormPreSubmit} className="bg-[#11212D] border border-[#9BA8AB]/15 rounded-xl p-8 card-shadow space-y-6">
-        {/* 1. ISSUE CATEGORY */}
         <div>
           <label className="block text-[12px] uppercase text-[#9BA8AB] font-semibold mb-2">
             1. Issue Category
@@ -1112,7 +949,6 @@ function ScreenPostAwaaz({ user, onCancel, onSubmit }) {
           </select>
         </div>
 
-        {/* 2. ISSUE DESCRIPTION */}
         <div>
           <label className="block text-[12px] uppercase text-[#9BA8AB] font-semibold mb-2">
             2. Issue Description
@@ -1127,7 +963,6 @@ function ScreenPostAwaaz({ user, onCancel, onSubmit }) {
           />
         </div>
 
-        {/* 3. GEO LOCATION WITH AUTOCOMPLETE */}
         <div className="relative">
           <label className="block text-[12px] uppercase text-[#9BA8AB] font-semibold mb-2">
             3. Geo Location (Address Search + Autocomplete)
@@ -1162,7 +997,6 @@ function ScreenPostAwaaz({ user, onCancel, onSubmit }) {
           )}
         </div>
 
-        {/* 4. MEDIA UPLOAD */}
         <div>
           <label className="block text-[12px] uppercase text-[#9BA8AB] font-semibold mb-2">
             4. Proof Photograph
@@ -1180,7 +1014,7 @@ function ScreenPostAwaaz({ user, onCancel, onSubmit }) {
               <img src={previewImage} alt="Preview" className="w-full h-60 object-cover" />
               <button
                 type="button"
-                onClick={() => setPreviewImage(null)}
+                onClick={() => { setPreviewImage(null); setRawFile(null); }}
                 className="absolute top-3 right-3 bg-[#06141B]/80 text-[#CCD0CF] hover:text-[#F44336] p-1.5 rounded-md btn-interact"
               >
                 <Icon name="XCircle" size={20} />
@@ -1199,7 +1033,6 @@ function ScreenPostAwaaz({ user, onCancel, onSubmit }) {
           )}
         </div>
 
-        {/* SUBMIT BUTTON */}
         <button
           type="submit"
           className="w-full py-3.5 bg-[#4A5C6A] hover:bg-[#6BBF4A] hover:text-black text-[#CCD0CF] font-semibold text-[16px] uppercase tracking-wider rounded-lg btn-interact border border-[#9BA8AB]/30 card-shadow"
@@ -1208,7 +1041,6 @@ function ScreenPostAwaaz({ user, onCancel, onSubmit }) {
         </button>
       </form>
 
-      {/* 5. POST AS ANONYMOUS MODAL */}
       {showAnonModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-[#11212D] border border-[#9BA8AB]/30 rounded-xl p-6 max-w-md w-full card-shadow">
@@ -1261,10 +1093,11 @@ function ScreenPostAwaaz({ user, onCancel, onSubmit }) {
               </button>
               <button
                 type="button"
+                disabled={loading}
                 onClick={handleFinalSubmit}
-                className="flex-1 py-2.5 bg-[#6BBF4A] text-black uppercase font-bold rounded-lg text-[14px] btn-interact"
+                className="flex-1 py-2.5 bg-[#6BBF4A] text-black uppercase font-bold rounded-lg text-[14px] btn-interact disabled:opacity-50"
               >
-                Confirm & Post
+                {loading ? 'Uploading...' : 'Confirm & Post'}
               </button>
             </div>
           </div>
@@ -1275,14 +1108,13 @@ function ScreenPostAwaaz({ user, onCancel, onSubmit }) {
 }
 
 function ScreenOfficerTaskBoard({ issues, user, onClaim, onOpenSaboot }) {
-  const [tab, setTab] = useState('queue'); // 'queue' | 'claimed'
+  const [tab, setTab] = useState('queue');
 
   const unclaimedIssues = issues.filter(i => i.status === 'Pending');
   const claimedIssues = issues.filter(i => i.status === 'Claimed' || i.status === 'Completed');
 
   return (
     <div className="w-full">
-      {/* HEADER & TOGGLE */}
       <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#253745]">
         <div>
           <h1 className="font-bebas text-[32px] text-[#CCD0CF]">
@@ -1293,14 +1125,11 @@ function ScreenOfficerTaskBoard({ issues, user, onClaim, onOpenSaboot }) {
           </p>
         </div>
 
-        {/* Tab Switcher */}
         <div className="flex bg-[#11212D] border border-[#9BA8AB]/20 rounded-lg p-1">
           <button
             onClick={() => setTab('queue')}
             className={`px-5 py-2 text-[14px] uppercase font-semibold rounded-md btn-interact ${
-              tab === 'queue'
-                ? 'bg-[#4A5C6A] text-[#CCD0CF] shadow'
-                : 'text-[#9BA8AB] hover:text-[#CCD0CF]'
+              tab === 'queue' ? 'bg-[#4A5C6A] text-[#CCD0CF] shadow' : 'text-[#9BA8AB] hover:text-[#CCD0CF]'
             }`}
           >
             Issues Queue ({unclaimedIssues.length})
@@ -1308,9 +1137,7 @@ function ScreenOfficerTaskBoard({ issues, user, onClaim, onOpenSaboot }) {
           <button
             onClick={() => setTab('claimed')}
             className={`px-5 py-2 text-[14px] uppercase font-semibold rounded-md btn-interact ${
-              tab === 'claimed'
-                ? 'bg-[#4A5C6A] text-[#CCD0CF] shadow'
-                : 'text-[#9BA8AB] hover:text-[#CCD0CF]'
+              tab === 'claimed' ? 'bg-[#4A5C6A] text-[#CCD0CF] shadow' : 'text-[#9BA8AB] hover:text-[#CCD0CF]'
             }`}
           >
             Claimed Workspace ({claimedIssues.length})
@@ -1318,7 +1145,6 @@ function ScreenOfficerTaskBoard({ issues, user, onClaim, onOpenSaboot }) {
         </div>
       </div>
 
-      {/* ISSUES QUEUE */}
       {tab === 'queue' && (
         <div className="grid grid-cols-2 gap-6">
           {unclaimedIssues.length === 0 ? (
@@ -1329,10 +1155,7 @@ function ScreenOfficerTaskBoard({ issues, user, onClaim, onOpenSaboot }) {
             </div>
           ) : (
             unclaimedIssues.map((issue) => (
-              <div
-                key={issue.id}
-                className="bg-[#11212D] border border-[#9BA8AB]/15 rounded-xl overflow-hidden card-shadow flex flex-col justify-between"
-              >
+              <div key={issue.id} className="bg-[#11212D] border border-[#9BA8AB]/15 rounded-xl overflow-hidden card-shadow flex flex-col justify-between">
                 <div>
                   <div className="relative h-48 w-full bg-[#06141B]">
                     <img src={issue.image} alt={issue.title} className="w-full h-full object-cover" />
@@ -1380,7 +1203,6 @@ function ScreenOfficerTaskBoard({ issues, user, onClaim, onOpenSaboot }) {
         </div>
       )}
 
-      {/* CLAIMED WORKSPACE */}
       {tab === 'claimed' && (
         <div className="grid grid-cols-2 gap-6">
           {claimedIssues.length === 0 ? (
@@ -1390,11 +1212,7 @@ function ScreenOfficerTaskBoard({ issues, user, onClaim, onOpenSaboot }) {
             </div>
           ) : (
             claimedIssues.map((issue) => (
-              <div
-                key={issue.id}
-                onClick={() => onOpenSaboot(issue)}
-                className="bg-[#11212D] border border-[#9BA8AB]/20 rounded-xl overflow-hidden card-shadow p-5 hover:border-[#6BBF4A]/50 cursor-pointer btn-interact"
-              >
+              <div key={issue.id} onClick={() => onOpenSaboot(issue)} className="bg-[#11212D] border border-[#9BA8AB]/20 rounded-xl overflow-hidden card-shadow p-5 hover:border-[#6BBF4A]/50 cursor-pointer btn-interact">
                 <div className="flex items-start justify-between mb-3">
                   <div>
                     <span className="px-2.5 py-0.5 rounded text-[11px] uppercase font-semibold bg-[#253745] text-[#9BA8AB] mr-2">
@@ -1441,7 +1259,6 @@ function ScreenSabootSubmission({ issue, onBack, onSubmitSuccess }) {
   const [amountSpent, setAmountSpent] = useState('');
   const [description, setDescription] = useState('');
 
-  // Auto-captured Simulated Geolocation and NTP Timestamp
   const autoGeo = issue.location || "12.9716° N, 77.5946° E (Ward 112)";
   const autoTimestamp = "23 Sep 2026, 08:24:10 PM IST (GPS Sync)";
 
@@ -1483,7 +1300,6 @@ function ScreenSabootSubmission({ issue, onBack, onSubmitSuccess }) {
         afterImg: afterImage
       }
     }
-
     onSubmitSuccess(completedIssue);
   };
 
@@ -1509,9 +1325,7 @@ function ScreenSabootSubmission({ issue, onBack, onSubmitSuccess }) {
       </div>
 
       <form onSubmit={handleSubmit} className="bg-[#11212D] border border-[#9BA8AB]/15 rounded-xl p-8 card-shadow space-y-6">
-        {/* SIDE BY SIDE IMAGE PICKERS */}
         <div className="grid grid-cols-2 gap-6">
-          {/* 1. BEFORE IMAGE */}
           <div>
             <label className="block text-[12px] uppercase text-[#9BA8AB] font-semibold mb-2">
               1. Before Image (Mandatory)
@@ -1546,7 +1360,6 @@ function ScreenSabootSubmission({ issue, onBack, onSubmitSuccess }) {
             )}
           </div>
 
-          {/* 2. AFTER IMAGE */}
           <div>
             <label className="block text-[12px] uppercase text-[#9BA8AB] font-semibold mb-2">
               2. After Image (Mandatory)
@@ -1586,7 +1399,6 @@ function ScreenSabootSubmission({ issue, onBack, onSubmitSuccess }) {
           </div>
         </div>
 
-        {/* 3 & 4. COST REPORT & AMOUNT SPENT */}
         <div className="grid grid-cols-2 gap-6 pt-2 border-t border-[#253745]">
           <div>
             <label className="block text-[12px] uppercase text-[#9BA8AB] font-semibold mb-2">
@@ -1628,7 +1440,6 @@ function ScreenSabootSubmission({ issue, onBack, onSubmitSuccess }) {
           </div>
         </div>
 
-        {/* 5. WORK DESCRIPTION */}
         <div>
           <label className="block text-[12px] uppercase text-[#9BA8AB] font-semibold mb-2">
             5. Work Description & Materials Used
@@ -1643,7 +1454,6 @@ function ScreenSabootSubmission({ issue, onBack, onSubmitSuccess }) {
           />
         </div>
 
-        {/* 6. GEO TAG & TIMESTAMP (AUTO-CAPTURED READ-ONLY) */}
         <div className="p-4 rounded-lg bg-[#06141B] border border-[#9BA8AB]/20 grid grid-cols-2 gap-4">
           <div>
             <span className="block text-[11px] uppercase tracking-wider text-[#9BA8AB] font-semibold mb-1">
@@ -1665,7 +1475,6 @@ function ScreenSabootSubmission({ issue, onBack, onSubmitSuccess }) {
           </div>
         </div>
 
-        {/* 7. SUBMIT BUTTON */}
         <button
           type="submit"
           disabled={!isFormValid}
@@ -1684,7 +1493,7 @@ function ScreenSabootSubmission({ issue, onBack, onSubmitSuccess }) {
 
 function ScreenAIVerification({ issue, userRole, onBack }) {
   const [step, setStep] = useState(0);
-  const [simulatedVerdict, setSimulatedVerdict] = useState('high'); // 'high' | 'low'
+  const [simulatedVerdict, setSimulatedVerdict] = useState('high');
 
   const verification = issue.verificationData || {
     locationOk: true,
@@ -1702,7 +1511,6 @@ function ScreenAIVerification({ issue, userRole, onBack }) {
   const isApproved = simulatedVerdict === 'high' ? verification.approved : false;
   const confidenceScore = simulatedVerdict === 'high' ? verification.confidence : 41;
 
-  // Sequential Reveal Animation (400-600ms delays)
   useEffect(() => {
     setStep(0);
     const intervals = [450, 950, 1500, 2100, 2700, 3400];
@@ -1711,13 +1519,11 @@ function ScreenAIVerification({ issue, userRole, onBack }) {
         setStep(index + 1);
       }, delay)
     );
-
     return () => timers.forEach(t => clearTimeout(t));
   }, [simulatedVerdict, issue.id]);
 
   return (
     <div className="max-w-4xl mx-auto w-full">
-      {/* HEADER & SCENARIO SWITCHER */}
       <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#253745]">
         <div className="flex items-center gap-3">
           <button
@@ -1741,7 +1547,6 @@ function ScreenAIVerification({ issue, userRole, onBack }) {
           </div>
         </div>
 
-        {/* Demo Switcher for Approved vs Flagged */}
         <div className="flex items-center gap-2 bg-[#11212D] border border-[#9BA8AB]/20 p-1.5 rounded-lg">
           <span className="text-[11px] uppercase text-[#9BA8AB] px-1 font-semibold">Demo Scenario:</span>
           <button
@@ -1763,16 +1568,10 @@ function ScreenAIVerification({ issue, userRole, onBack }) {
         </div>
       </div>
 
-      {/* SEQUENTIAL AUDIT STEPS */}
       <div className="space-y-4">
-        {/* CHECK 1: LOCATION */}
-        <div
-          className={`p-5 rounded-xl border transition-all duration-500 flex items-center justify-between ${
-            step >= 1
-              ? 'bg-[#11212D] border-[#9BA8AB]/20 opacity-100 translate-y-0 card-shadow'
-              : 'bg-[#11212D]/20 border-transparent opacity-0 translate-y-4'
-          }`}
-        >
+        <div className={`p-5 rounded-xl border transition-all duration-500 flex items-center justify-between ${
+          step >= 1 ? 'bg-[#11212D] border-[#9BA8AB]/20 opacity-100 translate-y-0 card-shadow' : 'bg-[#11212D]/20 border-transparent opacity-0 translate-y-4'
+        }`}>
           <div className="flex items-center gap-4">
             <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
               verification.locationOk ? 'bg-[#6BBF4A]/20 text-[#6BBF4A]' : 'bg-[#F44336]/20 text-[#F44336]'
@@ -1791,14 +1590,9 @@ function ScreenAIVerification({ issue, userRole, onBack }) {
           </span>
         </div>
 
-        {/* CHECK 2: TIMESTAMP */}
-        <div
-          className={`p-5 rounded-xl border transition-all duration-500 flex items-center justify-between ${
-            step >= 2
-              ? 'bg-[#11212D] border-[#9BA8AB]/20 opacity-100 translate-y-0 card-shadow'
-              : 'bg-[#11212D]/20 border-transparent opacity-0 translate-y-4'
-          }`}
-        >
+        <div className={`p-5 rounded-xl border transition-all duration-500 flex items-center justify-between ${
+          step >= 2 ? 'bg-[#11212D] border-[#9BA8AB]/20 opacity-100 translate-y-0 card-shadow' : 'bg-[#11212D]/20 border-transparent opacity-0 translate-y-4'
+        }`}>
           <div className="flex items-center gap-4">
             <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
               verification.timestampOk ? 'bg-[#6BBF4A]/20 text-[#6BBF4A]' : 'bg-[#F44336]/20 text-[#F44336]'
@@ -1817,14 +1611,9 @@ function ScreenAIVerification({ issue, userRole, onBack }) {
           </span>
         </div>
 
-        {/* CHECK 3: COST REASONABLENESS BAR CHART */}
-        <div
-          className={`p-5 rounded-xl border transition-all duration-500 ${
-            step >= 3
-              ? 'bg-[#11212D] border-[#9BA8AB]/20 opacity-100 translate-y-0 card-shadow'
-              : 'bg-[#11212D]/20 border-transparent opacity-0 translate-y-4'
-          }`}
-        >
+        <div className={`p-5 rounded-xl border transition-all duration-500 ${
+          step >= 3 ? 'bg-[#11212D] border-[#9BA8AB]/20 opacity-100 translate-y-0 card-shadow' : 'bg-[#11212D]/20 border-transparent opacity-0 translate-y-4'
+        }`}>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-[#6BBF4A]/20 text-[#6BBF4A] flex items-center justify-center">
@@ -1871,14 +1660,9 @@ function ScreenAIVerification({ issue, userRole, onBack }) {
           </div>
         </div>
 
-        {/* CHECK 4: IMAGE TAMPERING */}
-        <div
-          className={`p-5 rounded-xl border transition-all duration-500 flex items-center justify-between ${
-            step >= 4
-              ? 'bg-[#11212D] border-[#9BA8AB]/20 opacity-100 translate-y-0 card-shadow'
-              : 'bg-[#11212D]/20 border-transparent opacity-0 translate-y-4'
-          }`}
-        >
+        <div className={`p-5 rounded-xl border transition-all duration-500 flex items-center justify-between ${
+          step >= 4 ? 'bg-[#11212D] border-[#9BA8AB]/20 opacity-100 translate-y-0 card-shadow' : 'bg-[#11212D]/20 border-transparent opacity-0 translate-y-4'
+        }`}>
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 rounded-full bg-[#6BBF4A]/20 text-[#6BBF4A] flex items-center justify-center">
               <Icon name="CheckCircle2" size={22} />
@@ -1895,14 +1679,9 @@ function ScreenAIVerification({ issue, userRole, onBack }) {
           </span>
         </div>
 
-        {/* CHECK 5: BEFORE / AFTER COMPARISON */}
-        <div
-          className={`p-5 rounded-xl border transition-all duration-500 ${
-            step >= 5
-              ? 'bg-[#11212D] border-[#9BA8AB]/20 opacity-100 translate-y-0 card-shadow'
-              : 'bg-[#11212D]/20 border-transparent opacity-0 translate-y-4'
-          }`}
-        >
+        <div className={`p-5 rounded-xl border transition-all duration-500 ${
+          step >= 5 ? 'bg-[#11212D] border-[#9BA8AB]/20 opacity-100 translate-y-0 card-shadow' : 'bg-[#11212D]/20 border-transparent opacity-0 translate-y-4'
+        }`}>
           <h4 className="font-bebas text-[18px] text-[#CCD0CF] mb-3">
             5. Visual Feature Correspondences (Before / After)
           </h4>
@@ -1922,14 +1701,9 @@ function ScreenAIVerification({ issue, userRole, onBack }) {
           </div>
         </div>
 
-        {/* CHECK 6: CIRCULAR GAUGE & FINAL STATUS */}
-        <div
-          className={`p-6 rounded-xl border transition-all duration-700 ${
-            step >= 6
-              ? 'bg-[#11212D] border-[#9BA8AB]/30 opacity-100 translate-y-0 card-shadow'
-              : 'bg-[#11212D]/20 border-transparent opacity-0 translate-y-4'
-          }`}
-        >
+        <div className={`p-6 rounded-xl border transition-all duration-700 ${
+          step >= 6 ? 'bg-[#11212D] border-[#9BA8AB]/30 opacity-100 translate-y-0 card-shadow' : 'bg-[#11212D]/20 border-transparent opacity-0 translate-y-4'
+        }`}>
           <div className="flex items-center justify-between">
             <div>
               <h4 className="font-bebas text-[24px] text-[#CCD0CF] mb-1">
@@ -1940,28 +1714,13 @@ function ScreenAIVerification({ issue, userRole, onBack }) {
               </p>
             </div>
 
-            {/* Radial Circular Gauge */}
             <div className="relative w-28 h-28 flex items-center justify-center">
               <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" stroke="#253745" strokeWidth="8" fill="transparent" />
                 <circle
-                  cx="50"
-                  cy="50"
-                  r="40"
-                  stroke="#253745"
-                  strokeWidth="8"
-                  fill="transparent"
-                />
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="40"
-                  stroke={confidenceScore > 75 ? "#6BBF4A" : "#F44336"}
-                  strokeWidth="8"
-                  strokeDasharray="251.2"
-                  strokeDashoffset={251.2 - (251.2 * confidenceScore) / 100}
-                  strokeLinecap="round"
-                  fill="transparent"
-                  className="transition-all duration-1000 ease-out"
+                  cx="50" cy="50" r="40" stroke={confidenceScore > 75 ? "#6BBF4A" : "#F44336"} strokeWidth="8"
+                  strokeDasharray="251.2" strokeDashoffset={251.2 - (251.2 * confidenceScore) / 100}
+                  strokeLinecap="round" fill="transparent" className="transition-all duration-1000 ease-out"
                 />
               </svg>
               <div className="absolute flex flex-col items-center justify-center">
@@ -1973,7 +1732,6 @@ function ScreenAIVerification({ issue, userRole, onBack }) {
             </div>
           </div>
 
-          {/* FINAL BANNER */}
           {step >= 6 && (
             <div className="mt-6 pt-6 border-t border-[#253745]">
               {isApproved && confidenceScore > 75 ? (
@@ -2030,7 +1788,6 @@ function ScreenAIVerification({ issue, userRole, onBack }) {
 }
 
 function ScreenPublicLedger({ officers }) {
-  // Ordered by Total Seva Coins descending
   const sortedOfficers = [...officers].sort((a, b) => b.coins - a.coins);
 
   return (
@@ -2058,19 +1815,10 @@ function ScreenPublicLedger({ officers }) {
           </thead>
           <tbody className="divide-y divide-[#253745]/60 text-[15px]">
             {sortedOfficers.map((off) => (
-              <tr
-                key={off.rank}
-                className="hover:bg-[#253745]/30 transition-colors btn-interact"
-              >
+              <tr key={off.rank} className="hover:bg-[#253745]/30 transition-colors btn-interact">
                 <td className="py-4 px-6">
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bebas text-[18px] ${
-                    off.rank === 1
-                      ? 'bg-[#FF9800] text-black font-bold'
-                      : off.rank === 2
-                      ? 'bg-[#CCD0CF] text-black font-bold'
-                      : off.rank === 3
-                      ? 'bg-[#4A5C6A] text-white'
-                      : 'bg-[#253745] text-[#9BA8AB]'
+                    off.rank === 1 ? 'bg-[#FF9800] text-black font-bold' : off.rank === 2 ? 'bg-[#CCD0CF] text-black font-bold' : off.rank === 3 ? 'bg-[#4A5C6A] text-white' : 'bg-[#253745] text-[#9BA8AB]'
                   }`}>
                     {off.rank}
                   </div>
@@ -2109,7 +1857,6 @@ function ScreenProfile({ user, issues, onViewPramaan }) {
 
   return (
     <div className="max-w-4xl mx-auto w-full">
-      {/* IDENTITY BANNER */}
       <div className="bg-[#11212D] border border-[#9BA8AB]/20 rounded-xl p-6 card-shadow mb-8 flex items-center gap-6">
         <div className={`w-20 h-20 rounded-xl bg-[#253745] border-2 border-[#9BA8AB]/30 flex items-center justify-center font-bebas text-[36px] ${
           isOfficer ? 'text-[#FF9800]' : 'text-[#6BBF4A]'
@@ -2128,16 +1875,13 @@ function ScreenProfile({ user, issues, onViewPramaan }) {
             </span>
           </div>
           <p className="text-[13px] text-[#9BA8AB] mt-1 font-mono">
-            Employee / Citizen Identifier: {user.id}
+            Contact Registered: {user.email}
           </p>
         </div>
       </div>
 
-      {/* CONDITIONAL PROFILE VARIANT */}
       {isOfficer ? (
-        /* OFFICER PROFILE VARIANT */
         <div className="space-y-6">
-          {/* STATS TILES */}
           <div className="grid grid-cols-3 gap-6">
             <div className="bg-[#11212D] border border-[#9BA8AB]/15 rounded-xl p-5 card-shadow">
               <span className="text-[12px] uppercase text-[#9BA8AB] block mb-1 font-semibold">Total Seva Coins</span>
@@ -2164,9 +1908,7 @@ function ScreenProfile({ user, issues, onViewPramaan }) {
             </div>
           </div>
 
-          {/* PERFORMANCE CHARTS */}
           <div className="grid grid-cols-2 gap-6">
-            {/* Seva Coin Trend Line/Area simulation */}
             <div className="bg-[#11212D] border border-[#9BA8AB]/15 rounded-xl p-6 card-shadow">
               <h3 className="font-bebas text-[20px] text-[#CCD0CF] mb-4">
                 Seva Coin Accumulation Trend
@@ -2184,7 +1926,6 @@ function ScreenProfile({ user, issues, onViewPramaan }) {
               </div>
             </div>
 
-            {/* Category breakdown bar chart */}
             <div className="bg-[#11212D] border border-[#9BA8AB]/15 rounded-xl p-6 card-shadow">
               <h3 className="font-bebas text-[20px] text-[#CCD0CF] mb-4">
                 Category-Wise Resolutions
@@ -2211,7 +1952,6 @@ function ScreenProfile({ user, issues, onViewPramaan }) {
           </div>
         </div>
       ) : (
-        /* CITIZEN PROFILE VARIANT */
         <div className="bg-[#11212D] border border-[#9BA8AB]/15 rounded-xl p-6 card-shadow">
           <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#253745]">
             <h3 className="font-bebas text-[20px] text-[#CCD0CF]">
