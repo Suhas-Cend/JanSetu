@@ -170,21 +170,31 @@ const fetchImageAsBase64 = async (url) => {
 };
 
 /**
- * Runs a genuine multi-factor Pramaan audit against a submitted Saboot proof.
- * This is the ONLY place a verdict is produced — nothing upstream is allowed
- * to pre-decide approval. The model reasons about four independent factors
- * and we derive the final "approved" call ourselves from those factors
- * rather than trusting a single self-reported boolean.
+ * Runs a genuine multi-factor Pramaan audit against a submitted Saboot proof,
+ * using OpenAI's GPT-4o-mini vision model. This is the ONLY place a verdict
+ * is produced — nothing upstream is allowed to pre-decide approval. The
+ * model reasons about four independent factors and we derive the final
+ * "approved" call ourselves from those factors rather than trusting a
+ * single self-reported boolean.
+ *
+ * SECURITY NOTE: this calls the OpenAI API directly from the browser using
+ * a Vite env var, which means the key ships inside the client bundle and is
+ * visible to anyone who opens devtools. That's fine for a prototype, but
+ * before shipping this to real users, move this fetch into a Supabase Edge
+ * Function (or any small backend) that holds the key server-side and proxies
+ * the request — never ship a production API key in frontend JS.
  *
  * onStep(n) lets the caller drive a progress UI: 1 = started, 3 = images
  * sent, 5 = response received, 6 = done (set by the caller after this
  * resolves).
  */
 async function runPramaanAudit(issue, proof, onStep) {
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
   if (!apiKey) {
-    throw new Error("Missing VITE_GEMINI_API_KEY in your .env file. Add a Gemini API key to enable live AI audits.");
+    throw new Error("Missing VITE_OPENAI_API_KEY in your .env file. Add an OpenAI API key to enable live AI audits.");
   }
+
+  onStep?.(1);
 
   const [beforeBase64, afterBase64] = await Promise.all([
     fetchImageAsBase64(proof.beforeImg),
@@ -233,30 +243,35 @@ Respond with ONLY a raw JSON object — no markdown fences, no prose before or a
 }`;
 
   const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+    "https://api.openai.com/v1/chat/completions",
     {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      },
       body: JSON.stringify({
-        contents: [{
-          parts: [
-            { text: prompt },
-            { inline_data: { mime_type: "image/jpeg", data: beforeBase64 } },
-            { inline_data: { mime_type: "image/jpeg", data: afterBase64 } }
-          ]
-        }],
-        generationConfig: {
-          temperature: 0.2,
-          responseMimeType: "application/json"
-        }
+        model: "gpt-4o-mini",
+        temperature: 0.2,
+        response_format: { type: "json_object" },
+        messages: [
+          {
+            role: "user",
+            content: [
+              { type: "text", text: prompt },
+              { type: "image_url", image_url: { url: `data:image/jpeg;base64,${beforeBase64}`, detail: "high" } },
+              { type: "image_url", image_url: { url: `data:image/jpeg;base64,${afterBase64}`, detail: "high" } }
+            ]
+          }
+        ]
       })
     }
   );
 
   const data = await response.json();
-  if (data.error) throw new Error(data.error.message || "Gemini API request failed.");
+  if (data.error) throw new Error(data.error.message || "OpenAI API request failed.");
 
-  const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+  const rawText = data?.choices?.[0]?.message?.content;
   if (!rawText) throw new Error("Pramaan received an empty response from the AI model.");
 
   onStep?.(5);
